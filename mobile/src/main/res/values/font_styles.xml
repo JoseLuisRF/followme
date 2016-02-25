@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyFont" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="MyFont.Small">
+        <item name="android:textSize">@dimen/small_text</item>
+    </style>
+
+    <style name="MyFont.Medium">
+        <item name="android:textSize">@dimen/medium_text</item>
+    </style>
+
+    <style name="MyFont.Huge">
+        <item name="android:textSize">@dimen/huge_text</item>
+    </style>
+
+    <style name="MyFont.Huge.Blue">
+        <item name="android:textColor">#2196F3</item>
+    </style>
+
+    <style name="MyFont.Huge.Blue.Bold">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="MyFont.Indigo">
+        <item name="android:textColor">@color/indigo</item>
+    </style>
+
+    <style name="MyFont.Small.DeepOrange">
+        <item name="android:textColor">@color/deep_orange</item>
+    </style>
+
+    <style name="MyFont.Medium.DeepOrange">
+        <item name="android:textColor">@color/deep_orange</item>
+    </style>
+
+    <style name="MyFont.Huge.DeepOrange">
+        <item name="android:textColor">@color/deep_orange</item>
+    </style>
+
+</resources>

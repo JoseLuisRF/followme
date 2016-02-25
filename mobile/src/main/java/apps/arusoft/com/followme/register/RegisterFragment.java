@@ -1,0 +1,82 @@
+package apps.arusoft.com.followme.register;
+
+import android.app.Fragment;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+
+import apps.arusoft.com.followme.R;
+
+/**
+ * Created by jose.ramos on 24/02/2016.
+ */
+public class RegisterFragment extends Fragment implements RegisterView {
+
+    private static final String TAG = RegisterFragment.class.getSimpleName();
+    private ProgressBar loader;
+    private Button singUpButton;
+    private RegisterPresenter registerPresenter;
+    private EditText userNameEditText;
+    private EditText mailEditText;
+    private EditText passwordEditText;
+    private EditText confirmPasswordEditText;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        registerPresenter = new RegisterPresenter(this);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.register_fragment, container, false);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setupUI();
+        setupListeners();
+    }
+
+    private void setupUI() {
+        View view = getView();
+        singUpButton = (Button) view.findViewById(R.id.btn_register_sign_up);
+        loader = (ProgressBar) view.findViewById(R.id.pb_loader);
+        userNameEditText = (EditText)view.findViewById(R.id.et_register_username);
+        mailEditText = (EditText)view.findViewById(R.id.et_register_mail);
+        passwordEditText = (EditText)view.findViewById(R.id.et_register_password);
+        confirmPasswordEditText = (EditText)view.findViewById(R.id.et_register_confirm_password);
+    }
+
+    private void setupListeners(){
+        singUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "onClick");
+                registerPresenter.signUpUser(userNameEditText.getText().toString(),
+                        mailEditText.getText().toString(),
+                        passwordEditText.getText().toString(),
+                        confirmPasswordEditText.getText().toString());
+            }
+        });
+    }
+
+    @Override
+    public void showLoader() {
+        loader.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void dismissLoader() {
+        loader.setVisibility(View.INVISIBLE);
+    }
+}
