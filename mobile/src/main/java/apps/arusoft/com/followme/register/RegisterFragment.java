@@ -30,7 +30,7 @@ public class RegisterFragment extends Fragment implements RegisterView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registerPresenter = new RegisterPresenter(this);
+//        registerPresenter = new RegisterPresenter();
     }
 
     @Nullable

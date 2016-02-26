@@ -7,8 +7,11 @@ import apps.arusoft.com.followme.api.OnFinishCallsListener;
  */
 public class FollowMeManagerImpl implements FollowMeManager {
     private OnFinishCallsListener callsListener;
+    private static FollowMeManager instance;
 
-    public FollowMeManagerImpl(OnFinishCallsListener callsListener) {
-        this.callsListener = callsListener;
+
+    @Override
+    public void registerUser(String username, String email, String password, String confirmPassword) {
+
     }
 }

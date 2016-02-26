@@ -2,7 +2,6 @@ package apps.arusoft.com.followme.register;
 
 import apps.arusoft.com.followme.api.OnFinishCallsListener;
 import apps.arusoft.com.followme.managers.FollowMeManager;
-import apps.arusoft.com.followme.managers.FollowMeManagerImpl;
 import apps.arusoft.com.followme.models.Response;
 
 /**
