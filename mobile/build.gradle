@@ -44,4 +44,5 @@ dependencies {
     compile 'javax.inject:javax.inject:1'
     testCompile 'junit:junit:4.12'
     compile 'com.firebase:firebase-client-android:2.5.2+'
+    compile 'io.reactivex:rxandroid:0.23.0'
 }

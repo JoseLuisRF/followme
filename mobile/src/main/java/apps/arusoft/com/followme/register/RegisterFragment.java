@@ -10,13 +10,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+
+import javax.inject.Inject;
+
+import apps.arusoft.com.followme.CustomApplication;
 import apps.arusoft.com.followme.R;
 
 /**
  * Created by jose.ramos on 24/02/2016.
  */
 public class RegisterFragment extends Fragment implements RegisterView {
+
+    @Inject
+    Firebase firebase;
 
     private static final String TAG = RegisterFragment.class.getSimpleName();
     private ProgressBar loader;
@@ -30,6 +39,8 @@ public class RegisterFragment extends Fragment implements RegisterView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((CustomApplication)getActivity().getApplication()).getAppComponent().inject(this);
+
 //        registerPresenter = new RegisterPresenter();
     }
 
@@ -37,6 +48,9 @@ public class RegisterFragment extends Fragment implements RegisterView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register_fragment, container, false);
+
+        TextView textView = (TextView)view.findViewById(R.id.tv_message);
+        textView.setText("Dependency Injection worked: " + (firebase == null ? "false" : "true"));
         return view;
     }
 
