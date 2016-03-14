@@ -35,6 +35,14 @@ public class RegisterFragment extends Fragment implements RegisterView {
     private EditText mailEditText;
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
+    private static RegisterFragment instance;
+
+    public static Fragment newInstance(){
+        if( instance == null){
+            instance = new RegisterFragment();
+        }
+        return instance;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

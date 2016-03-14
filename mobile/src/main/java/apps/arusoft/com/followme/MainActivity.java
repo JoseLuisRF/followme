@@ -1,5 +1,7 @@
 package apps.arusoft.com.followme;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,16 +12,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.appevents.AppEventsLogger;
 import com.firebase.client.Firebase;
 
 import javax.inject.Inject;
 
 import apps.arusoft.com.followme.R;
+import apps.arusoft.com.followme.login.LoginFragment;
+import apps.arusoft.com.followme.register.RegisterFragment;
+import apps.arusoft.com.followme.ui.Navigator;
 
 /**
  * Created by jose.ramos on 24/02/2016.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Navigator {
 
 
 
@@ -28,18 +34,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ((CustomApplication)getApplication()).getAppComponent().inject(this);
+        navigateToLoginFragment();
+    }
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //FB: Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //FB: Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
     }
 
     @Override
@@ -62,5 +71,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void navigateToRegisterFragment() {
+        Fragment fragment = RegisterFragment.newInstance();
+        getFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
+    }
+
+    @Override
+    public void navigateToLoginFragment() {
+        Fragment fragment = LoginFragment.newInstance();
+        getFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
+    }
+
+    @Override
+    public void navigateToHomeFragment() {
+        Intent intent = new Intent(this, SecondLevelActivity.class);
+        startActivity(intent);
     }
 }

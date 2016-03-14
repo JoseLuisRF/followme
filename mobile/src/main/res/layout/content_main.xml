@@ -12,9 +12,5 @@
     tools:context=".SecondLevelActivity"
     tools:showIn="@layout/activity_main">
 
-   <fragment
-       android:id="@+id/register_fragment"
-       android:name="apps.arusoft.com.followme.register.RegisterFragment"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
+
 </RelativeLayout>

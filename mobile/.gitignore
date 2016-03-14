@@ -35,3 +35,6 @@ captures/
 # Intellij
 *.iml
 
+# Facebook AppId
+/src/main/res/values/strings_configuration.xml
+

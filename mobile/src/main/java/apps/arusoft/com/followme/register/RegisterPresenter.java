@@ -11,8 +11,8 @@ import apps.arusoft.com.followme.models.Response;
  */
 public class RegisterPresenter implements OnFinishCallsListener {
 
-    @Inject
-    private FollowMeManager followMeManager;
+    /*@Inject
+    private FollowMeManager followMeManager;*/
 
     private RegisterView registerView;
 
@@ -22,7 +22,7 @@ public class RegisterPresenter implements OnFinishCallsListener {
 
     public void signUpUser(String username, String mail, String password, String confirmPassword){
         registerView.showLoader();
-        followMeManager.registerUser(username,mail,password,confirmPassword);
+        //followMeManager.registerUser(username,mail,password,confirmPassword);
 
     }
 
