@@ -21,10 +21,11 @@ public class CustomApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
         Firebase.setAndroidContext(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
         facebookCallbackManager = CallbackManager.Factory.create();
-        component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+
 
     }
 

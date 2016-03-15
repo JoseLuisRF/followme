@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 import apps.arusoft.com.followme.R;
 import apps.arusoft.com.followme.managers.FollowMeManager;
 import apps.arusoft.com.followme.managers.FollowMeManagerImpl;
+import apps.arusoft.com.followme.managers.login.LoginManager;
 import dagger.Module;
 import dagger.Provides;
 
@@ -18,7 +19,7 @@ import dagger.Provides;
 @Module
 public class AppModule {
 
-    Application mApplication;
+    private Application mApplication;
 
     public AppModule(Application application) {
         mApplication = application;
@@ -41,6 +42,12 @@ public class AppModule {
     @Singleton
     public Firebase getFireBase() {
         return new Firebase(mApplication.getString(R.string.app_firebase_url));
+    }
+
+    @Provides
+    @Singleton
+    public LoginManager getLoginManager() {
+        return new LoginManager(mApplication);
     }
 
 }

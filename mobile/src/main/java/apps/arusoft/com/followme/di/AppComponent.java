@@ -3,6 +3,7 @@ package apps.arusoft.com.followme.di;
 import javax.inject.Singleton;
 
 import apps.arusoft.com.followme.MainActivity;
+import apps.arusoft.com.followme.login.LoginFragment;
 import apps.arusoft.com.followme.register.RegisterFragment;
 import dagger.Component;
 
@@ -14,4 +15,5 @@ import dagger.Component;
 public interface AppComponent {
     void inject(MainActivity activity);
     void inject (RegisterFragment fragment);
+    void inject (LoginFragment fragment);
 }

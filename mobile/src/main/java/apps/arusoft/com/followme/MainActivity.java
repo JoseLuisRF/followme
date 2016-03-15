@@ -90,4 +90,5 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         Intent intent = new Intent(this, SecondLevelActivity.class);
         startActivity(intent);
     }
+
 }
