@@ -31,7 +31,7 @@
 
         <activity android:name=".SecondLevelActivity"></activity>
 
-        <!--Facebook Login Activity-->
+        <!--Facebook LoginApi Activity-->
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"

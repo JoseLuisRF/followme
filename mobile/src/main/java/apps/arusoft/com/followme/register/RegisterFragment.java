@@ -24,9 +24,6 @@ import apps.arusoft.com.followme.R;
  */
 public class RegisterFragment extends Fragment implements RegisterView {
 
-    @Inject
-    Firebase firebase;
-
     private static final String TAG = RegisterFragment.class.getSimpleName();
     private ProgressBar loader;
     private Button singUpButton;
@@ -47,9 +44,7 @@ public class RegisterFragment extends Fragment implements RegisterView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((CustomApplication)getActivity().getApplication()).getAppComponent().inject(this);
-
-//        registerPresenter = new RegisterPresenter();
+        registerPresenter = new RegisterPresenter(this);
     }
 
     @Nullable
@@ -58,7 +53,6 @@ public class RegisterFragment extends Fragment implements RegisterView {
         View view = inflater.inflate(R.layout.register_fragment, container, false);
 
         TextView textView = (TextView)view.findViewById(R.id.tv_message);
-        textView.setText("Dependency Injection worked: " + (firebase == null ? "false" : "true"));
         return view;
     }
 

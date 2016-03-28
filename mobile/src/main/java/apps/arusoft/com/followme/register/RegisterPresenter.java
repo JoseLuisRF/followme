@@ -2,6 +2,7 @@ package apps.arusoft.com.followme.register;
 
 import javax.inject.Inject;
 
+import apps.arusoft.com.followme.CustomApplication;
 import apps.arusoft.com.followme.api.OnFinishCallsListener;
 import apps.arusoft.com.followme.managers.FollowMeManager;
 import apps.arusoft.com.followme.models.Response;
@@ -11,12 +12,13 @@ import apps.arusoft.com.followme.models.Response;
  */
 public class RegisterPresenter implements OnFinishCallsListener {
 
-    /*@Inject
-    private FollowMeManager followMeManager;*/
+    @Inject
+    FollowMeManager followMeManager;
 
     private RegisterView registerView;
 
     public RegisterPresenter(RegisterView registerView){
+        ((CustomApplication)((RegisterFragment)registerView).getActivity().getApplication()).getAppComponent().inject(this);
         this.registerView = registerView;
     }
 

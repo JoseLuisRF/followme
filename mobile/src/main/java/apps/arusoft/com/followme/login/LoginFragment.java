@@ -8,16 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-
 import javax.inject.Inject;
 
 import apps.arusoft.com.followme.CustomApplication;
-import apps.arusoft.com.followme.managers.login.Login;
-import apps.arusoft.com.followme.managers.login.LoginManager;
+import apps.arusoft.com.followme.managers.login.LoginApiManager;
 import apps.arusoft.com.followme.ui.BaseFragment;
 import apps.arusoft.com.followme.R;
 import apps.arusoft.com.followme.ui.Navigator;
@@ -25,11 +19,10 @@ import apps.arusoft.com.followme.ui.Navigator;
 /**
  * Created by jose.ramos on 24/02/2016.
  */
-public class LoginFragment extends BaseFragment {
+public class LoginFragment extends BaseFragment implements  LoginView{
 
     @Inject
-    private LoginManager loginManager;
-    private Login login;
+    LoginApiManager loginApiManager;
 
     private static String TAG = LoginFragment.class.getSimpleName();
     private static LoginFragment instance;
@@ -58,39 +51,56 @@ public class LoginFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         navigator = (Navigator) getActivity();
-        login = loginManager.getFacebookLogin();
         setupUI();
 
     }
 
     private void setupUI() {
-        LoginButton loginButton = (LoginButton) getView().findViewById(R.id.login_button);
-        loginButton.setFragment(this);
-        loginButton.setReadPermissions("user_friends");
-        loginButton.registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
+        View loginButton =  getView().findViewById(R.id.login_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "onSuccess");
-                navigator.navigateToHomeFragment();
-            }
-
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "onError");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "onError");
-                navigator.navigateToRegisterFragment();
+            public void onClick(View v) {
+                loginApiManager.getFacebookLogin().login(LoginFragment.this);
             }
         });
+
+
+//        LoginButton loginButton = (LoginButton) getView().findViewById(R.id.login_button);
+//        loginButton.setFragment(this);
+//        loginButton.setReadPermissions("user_friends");
+//        loginButton.registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
+//            @Override
+//            public void onSuccess(LoginResult loginResult) {
+//                Log.d(TAG, "onSuccess");
+//                navigator.navigateToHomeFragment();
+//            }
+//
+//            @Override
+//            public void onCancel() {
+//                Log.d(TAG, "onError");
+//            }
+//
+//            @Override
+//            public void onError(FacebookException error) {
+//                Log.d(TAG, "onError");
+//                navigator.navigateToRegisterFragment();
+//            }
+//        });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        loginApiManager.getFacebookLogin().onActivityResult(requestCode, resultCode, data);
+    }
 
-        facebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+    @Override
+    public void showLoader() {
+
+    }
+
+    @Override
+    public void dismissLoader() {
+
     }
 }
