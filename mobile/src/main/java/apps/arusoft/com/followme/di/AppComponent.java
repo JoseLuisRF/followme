@@ -3,6 +3,7 @@ package apps.arusoft.com.followme.di;
 import javax.inject.Singleton;
 
 import apps.arusoft.com.followme.MainActivity;
+import apps.arusoft.com.followme.SecondLevelActivity;
 import apps.arusoft.com.followme.di.managers.ManagerModule;
 import apps.arusoft.com.followme.login.LoginFragment;
 import apps.arusoft.com.followme.login.LoginPresenter;
@@ -21,4 +22,5 @@ public interface AppComponent {
 
     void inject(RegisterPresenter presenter);
     void inject(LoginPresenter presenter);
+    void inject(SecondLevelActivity activity);
 }

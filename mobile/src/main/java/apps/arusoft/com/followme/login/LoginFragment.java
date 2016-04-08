@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import apps.arusoft.com.followme.CustomApplication;
 import apps.arusoft.com.followme.managers.login.LoginApiManager;
+import apps.arusoft.com.followme.register.RegisterView;
 import apps.arusoft.com.followme.ui.BaseFragment;
 import apps.arusoft.com.followme.R;
 import apps.arusoft.com.followme.ui.Navigator;
@@ -19,14 +20,12 @@ import apps.arusoft.com.followme.ui.Navigator;
 /**
  * Created by jose.ramos on 24/02/2016.
  */
-public class LoginFragment extends BaseFragment implements  LoginView{
-
-    @Inject
-    LoginApiManager loginApiManager;
+public class LoginFragment extends BaseFragment implements  LoginView {
 
     private static String TAG = LoginFragment.class.getSimpleName();
     private static LoginFragment instance;
     private Navigator navigator;
+    private LoginPresenter loginPresenter;
 
     public static Fragment newInstance() {
         if (instance == null) {
@@ -38,7 +37,7 @@ public class LoginFragment extends BaseFragment implements  LoginView{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((CustomApplication)getActivity().getApplication()).getAppComponent().inject(this);
+        loginPresenter = new LoginPresenter(this);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class LoginFragment extends BaseFragment implements  LoginView{
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginApiManager.getFacebookLogin().login(LoginFragment.this);
+                loginPresenter.signInFacebook();
             }
         });
 
@@ -90,8 +89,8 @@ public class LoginFragment extends BaseFragment implements  LoginView{
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        loginApiManager.getFacebookLogin().onActivityResult(requestCode, resultCode, data);
+        //super.onActivityResult(requestCode, resultCode, data);
+        loginPresenter.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

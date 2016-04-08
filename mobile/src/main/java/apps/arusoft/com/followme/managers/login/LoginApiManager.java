@@ -12,8 +12,8 @@ public class LoginApiManager {
         this.application = application;
     }
 
-    public LoginApi getFacebookLogin() {
-        return FacebookLoginApiImpl.newInstance(application);
+    public LoginApi getFacebookLogin(FacebookLoginApiImpl.LoginListener listener) {
+        return new FacebookLoginApiImpl(application, listener);
     }
 
     public LoginApi getAFILogin(){

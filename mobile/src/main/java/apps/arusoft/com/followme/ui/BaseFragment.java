@@ -12,14 +12,11 @@ import apps.arusoft.com.followme.CustomApplication;
  */
 public class BaseFragment extends Fragment {
 
-    protected CallbackManager facebookCallbackManager;
     private CustomApplication application;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         application = ((CustomApplication)this.getActivity().getApplication());
-        facebookCallbackManager = application.getFacebookCallbackManager();
-
     }
 }

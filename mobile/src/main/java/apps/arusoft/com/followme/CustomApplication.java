@@ -16,7 +16,6 @@ import apps.arusoft.com.followme.di.DaggerAppComponent;
 public class CustomApplication extends Application {
 
     private AppComponent component;
-    CallbackManager facebookCallbackManager;
 
     @Override
     public void onCreate() {
@@ -24,13 +23,6 @@ public class CustomApplication extends Application {
         component = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
         Firebase.setAndroidContext(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
-        facebookCallbackManager = CallbackManager.Factory.create();
-
-
-    }
-
-    public CallbackManager getFacebookCallbackManager(){
-        return facebookCallbackManager;
     }
 
     public AppComponent getAppComponent(){
